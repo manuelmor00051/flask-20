@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Nuevo movimiento {% endblock %}
+{% block contenido_pagina %}
+            <h1>Borrado de movimiento</h1>
+            <form action="/borrar/{{ id }}" method="post">
+                {{ el_formulario.hidden_tag() }} <!--Aquí viaja el token con la secret_key -->
+                <div class="campo-formulario">
+                    {{ el_formulario.fecha.label() }}
+                    {{ el_formulario.fecha(type="date", disable=True) }} <!--con disable=True es una forma de mostrar la informacion pero no se puede modificar, ya que no me deja elegir fecha-->
+                </div>
+                <div class="campo-formulario">
+                    {{ el_formulario.concepto.label() }}
+                    {{ el_formulario.concepto.data }} <!--con el .data es otra forma de que me muestre la información pero no la puedo -->
+                </div>
+                <div class="campo-formulario">
+                    <label>Ingreso o Gasto</label>
+                    {% if el_formulario.ingreso_gasto.data == 'I' %} Ingreso {% else %} Gasto {% endif %}
+                 </div>
+                <div class="campo-formulario">
+                    {{ el_formulario.cantidad.label() }}
+                    {{ el_formulario.cantidad.data }}
+                </div>                
+                {{ el_formulario.submit() }}
+            </form>
+{% endblock %}
